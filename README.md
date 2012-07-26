@@ -58,3 +58,12 @@ Usage: check_nimrod [-h] [-L] [-T timeout] [-v] [-V] [-P port] -H hostname [-u u
 -v (--verbose)      Print some useful information
 -L (--license)      Print license information</code></pre>
 Optional parameters are in square brackets.
+
+This initial revision of the Nagios-Nimrod check is primarily designed for guages and will perform either a threshold, reverse threshold, or string match type check.
+
+#### Further details on the parameters
+
+* logName - this parameter refers to the available endpoints that Nimrod is tracking. Nimrod reads in log files hence the 'logName' parameter. (i.e. /logs/[apache])
+* endpointName - this is the endpoint that Nimrod is checking, it is the parameter after the metric type (i.e. /logs/apache/guages/[errors])
+* jobName - this is the full reference to the JSON value we want to collect (i.e it could be gauge or percentiles:99th:gauge)
+* type - threshold is a simple threshold check. Thresholds currently expects nimrod values in nanoseconds, and warn/crits in milliseconds 
