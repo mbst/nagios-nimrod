@@ -1,10 +1,12 @@
 # nagios-nimrod
 
-Nagios check for Nimrod metrics
-
 ## Overview
 
-This script is designed to retrieve metrics from a Nimrod server and process it as a Nagios check
+This script is designed to retrieve metrics from a Nimrod server and process it as a Nagios check. The initial implementation makes some basic assumtions:
+* Nimrod is running over http
+* Nimrod is receiving metrics in nanoseconds
+* The plugin is primarily designed for apache log metrics and response times
+* The 'alert' type also expects to process a gauge (primary use case is for scheduled tasks, checking for failures and how long they have been running)
 
 ## Installation
 
