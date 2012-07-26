@@ -6,6 +6,7 @@ This script is designed to retrieve metrics from a Nimrod server and process it 
 * Nimrod is running over http
 * Nimrod is receiving metrics in nanoseconds
 * The plugin is primarily designed for apache log metrics and response times
+* Check types available: threshold, reverse, string, alert
 * The 'alert' type also expects to process a gauge (primary use case is for scheduled tasks, checking for failures and how long they have been running)
 
 ## Installation
