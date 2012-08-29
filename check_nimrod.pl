@@ -99,6 +99,8 @@ if ( $res->is_success ) {
 	switch ($opt_type){
    		case "threshold"        { threshold_check($value,$count) }
    	 	case "reverse"          { reverse_threshold_check($value) }
+		case "rate"		{ rate_check($value,$count) }
+		case "reverse_rate"             { rate_check($value,$count) }
 	        case "string"           { string_check($value) }
 		case "alert"		{ alert_check($value) }
         	else  {  
@@ -209,6 +211,59 @@ sub threshold_check {
                 exit 2;
         }
 }
+
+sub rate_check {
+        my $val = $_[0];
+        my $queries = $_[1];
+        my $extra_info = "";
+        if ($opt_window && $queries) {
+                my $rate = ($queries / $opt_window);
+                $rate = sprintf "%.2f", $rate;
+                $extra_info = " Query rate is $rate";
+        } else {
+		print "UNKNOWN Rate flag not provided";
+                exit 3;
+	}
+        if (int($rate) < $opt_warn) {
+                print "OK $extra_info. Warning at $opt_warn\n";
+                exit 0;
+        } elsif ((int($rate) >= $opt_warn) && (int($rate) < $opt_crit)) {
+                print "WARNING $extra_info. Critical at $opt_crit";
+                exit 1;
+        } else {
+                print "CRITICAL $extra_info";
+                exit 2;
+        }
+}
+
+
+
+
+sub reverse_rate_check {
+        my $val = $_[0];
+        my $queries = $_[1];
+        my $extra_info = "";
+        if ($opt_window && $queries) {
+                my $rate = ($queries / $opt_window);
+                $rate = sprintf "%.2f", $rate;
+                $extra_info = " Query rate is $rate";
+        } else {
+		print "UNKNOWN Rate flag not provided";
+                exit 3;
+	}
+        if (int($rate) > $opt_warn) {
+                print "OK $extra_info. Warning at $opt_warn\n";
+                exit 0;
+        } elsif ((int($rate) <= $opt_warn) && (int($rate) > $opt_crit)) {
+                print "WARNING $extra_info. Critical at $opt_crit";
+                exit 1;
+        } else {
+                print "CRITICAL $extra_info";
+                exit 2;
+        }
+
+}
+
 
 sub print_exit {
 	print "$msg\n";
