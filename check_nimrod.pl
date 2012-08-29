@@ -114,8 +114,15 @@ if ( $res->is_success ) {
   }
 
 
-}
-else {
+} elsif ($opt_type eq "rate") {
+  $msg = "OK Rate is 0";
+  $state = $ERRORS{'OK'};
+  print_exit()
+} elsif ($opt_type eq "reverse_rate") {
+  $msg = "CRITICAL Rate is 0";
+  $state = $ERRORS{'CRITICAL'};
+  print_exit()  
+}else {
   $msg = sprintf("FAILED TO OPEN URL: $QUERY");
   $state = $ERRORS{'WARNING'};
   print_exit()
