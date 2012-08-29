@@ -115,7 +115,7 @@ if ( $res->is_success ) {
 }
 else {
   $msg = sprintf("FAILED TO OPEN URL: $QUERY");
-  $state = $ERRORS{'UNKNOWN'};
+  $state = $ERRORS{'WARNING'};
   print_exit()
 }
 
@@ -194,7 +194,8 @@ sub threshold_check {
 	my $queries = $_[1];
 	my $extra_info = "";
 	if ($opt_window && $queries) {
-		my $rate = int($queries / $opt_window);
+		my $rate = ($queries / $opt_window);
+		$rate = sprintf "%.2f", $rate;
 		$extra_info = " Query rate is $rate";
 	}
         if ($val < $opt_warn) {
