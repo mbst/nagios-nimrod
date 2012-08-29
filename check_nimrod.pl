@@ -195,8 +195,9 @@ sub threshold_check {
         my $val = $_[0];
 	my $queries = $_[1];
 	my $extra_info = "";
+	my $rate = "";
 	if ($opt_window && $queries) {
-		my $rate = ($queries / $opt_window);
+		$rate = ($queries / $opt_window);
 		$rate = sprintf "%.2f", $rate;
 		$extra_info = " Query rate is $rate";
 	}
@@ -216,8 +217,9 @@ sub rate_check {
         my $val = $_[0];
         my $queries = $_[1];
         my $extra_info = "";
+	my $rate = "";
         if ($opt_window && $queries) {
-                my $rate = ($queries / $opt_window);
+                $rate = ($queries / $opt_window);
                 $rate = sprintf "%.2f", $rate;
                 $extra_info = " Query rate is $rate";
         } else {
@@ -243,8 +245,9 @@ sub reverse_rate_check {
         my $val = $_[0];
         my $queries = $_[1];
         my $extra_info = "";
+	my $rate = "";
         if ($opt_window && $queries) {
-                my $rate = ($queries / $opt_window);
+                $rate = ($queries / $opt_window);
                 $rate = sprintf "%.2f", $rate;
                 $extra_info = " Query rate is $rate";
         } else {
